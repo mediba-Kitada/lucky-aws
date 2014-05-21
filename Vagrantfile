@@ -88,7 +88,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.cookbooks_path = ["./chef-repo/site-cookbooks","./chef-repo/cookbooks"]
       chef.run_list = [
         "yum",
-        "base",        
+        "base",
+        "docker",
       ]
       chef.json = {
       #  :apache => {
