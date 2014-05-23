@@ -85,21 +85,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
   
   config.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = ["./chef-repo/site-cookbooks","./chef-repo/cookbooks"]
+      chef.cookbooks_path = ["./chef-coupy/site-cookbooks","./chef-coupy/cookbooks"]
       chef.run_list = [
         "yum",
+        "database",
+        "apache",
         "base",
-        "docker",
+        "mysql",
+        "rsyslog",
+        "php55",
+        "kvs"
       ]
       chef.json = {
-      #  :apache => {
-      #    :env => ".local",
-      #  },
-      #  :mysql => {
-      #    :coupy_password => "hogehoge",
-      #    :bdb_password => "hogehoge",
-      #    :async_password => "hogehoge"
-      #  }
+        :mysql => {
+          :aws_password => "awspassword"
+        }
       }
 
   #   chef.roles_path = "../my-recipes/roles"
