@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # cdn資産をsvnリポジトリからチェックアウト
   # AD認証を実施しているので、自動連携を見送り
-  #config.vm.provision :shell, :path => 'bootstrap/svn.sh'
+  # config.vm.provision :shell, :path => 'bootstrap/svn.sh'
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
