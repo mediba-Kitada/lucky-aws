@@ -40,6 +40,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "./../../../coupy", "/var/www/"
 
+  # cdn資産をsvnリポジトリからチェックアウト
+  # AD認証を実施しているので、自動連携を見送り
+  #config.vm.provision :shell, :path => 'bootstrap/svn.sh'
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
@@ -99,7 +103,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "coupy",
         "smartpass",
         "au_core",
-        "api-smartpass"
+        "api-smartpass",
+        "cdn-img"
       ]
       # レシピ用変数設定
       chef.json = {
