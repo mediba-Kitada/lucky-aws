@@ -84,6 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.omnibus.chef_version = :latest
   
+  # 各レシピ実行
   config.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = ["./chef-coupy/site-cookbooks","./chef-coupy/cookbooks"]
       chef.run_list = [
@@ -94,11 +95,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "mysql",
         "rsyslog",
         "php55",
-        "kvs"
+        "kvs",
+        "coupy",
+        "smartpass",
+        "au_core",
+        "api-smartpass"
       ]
+      # レシピ用変数設定
       chef.json = {
         :mysql => {
           :aws_password => "awspassword"
+        },
+        :apache => {
+          :env => "local",
+          :appenv => "point/local"
         }
       }
 

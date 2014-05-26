@@ -1,3 +1,15 @@
 [submodule "chef-coupy"]
 	path = chef-coupy
 	url = git@github.com:mediba-Kitada/chef-coupy.git
+[submodule "smartpass"]
+	path = smartpass
+	url = git@github.com:mediba-system/smartpass.git
+[submodule "coupy"]
+	path = coupy
+	url = git@github.com:mediba-system/coupy.git
+[submodule "au_core"]
+	path = au_core
+	url = git@github.com:mediba-system/au_core.git
+[submodule "api-smartpass"]
+	path = api-smartpass
+	url = git@github.com:mediba-system/api-smartpass.git
