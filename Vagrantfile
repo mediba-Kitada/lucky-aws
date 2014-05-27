@@ -113,7 +113,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         },
         :apache => {
           :env => "local",
-          :appenv => "point/local"
+          :appenv => "point/local",
+          :gateway => "20.0.0.1"
         }
       }
 
