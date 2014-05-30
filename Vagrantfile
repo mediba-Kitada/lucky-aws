@@ -104,10 +104,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "smartpass",
         "au_core",
         "api-smartpass",
-        "cdn-img"
+        "cdn-img",
+        "chef-td-agent"
       ]
       # レシピ用変数設定
       chef.json = {
+        :base => {
+          :mediu_password => "mediu"
+        },
         :mysql => {
           :aws_password => "awspassword"
         },
