@@ -29,3 +29,42 @@ yum_repository 'remi-php55' do
   mirrorlist 'http://rpms.famillecollet.com/enterprise/6/php55/mirror'
   gpgkey 'http://rpms.famillecollet.com/RPM-GPG-KEY-remi'
 end
+
+link "/etc/localtime" do
+  only_if "find /etc/localtime"
+  to "/usr/share/zoneinfo/Asia/Tokyo"
+end
+
+%w{git telnet wget zsh nkf tig vim}.each do |pkg|
+  package pkg do
+    action :install
+    options "--enablerepo=epel"
+  end
+end
+
+user "apache" do
+  comment "apache"
+  shell "/sbin/nologin"
+  password nil
+  supports :create => true
+end
+
+group "apache" do
+  gid 48
+  members ['apache']
+  action :create
+end
+
+remote_file "/tmp/yii.tar.gz" do
+  source "https://github.com/yiisoft/yii/releases/download/1.1.14/yii-1.1.14.f0fee9.tar.gz"
+end
+
+bash "instal-yii" do
+  code <<-EOL
+    tar xfvz /tmp/yii.tar.gz -C /var/www/
+  EOL
+end
+
+link "/var/www/yii" do
+  to "/var/www/yii-1.1.14.f0fee9"
+end

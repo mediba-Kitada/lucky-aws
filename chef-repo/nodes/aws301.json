@@ -1,6 +1,19 @@
 {
+  "mysql":{
+    "aws_password":"awspassword"
+  },
+  "apache":{
+    "env":"aws301",
+    "appenv":"point/develop"
+  },
   "run_list":[
     "yum",
-    "base"
+    "database",
+    "apache",
+    "base",
+    "mysql",
+    "rsyslog",
+    "php55",
+    "kvs"
     ]
 }
