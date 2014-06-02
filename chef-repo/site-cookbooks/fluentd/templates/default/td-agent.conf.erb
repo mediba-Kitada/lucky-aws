@@ -1,0 +1,84 @@
+<% if node['td_agent']['includes'] %>
+include conf.d/*.conf 
+<% end %>
+<% if node['td_agent']['default_config'] %>
+####
+## Output descriptions:
+##
+
+<% if node['base']['env'] == 'local' %>
+
+## PRIME
+<match pass.coupon.detail>
+  type file
+  path /var/log/td-agent/coupon-detail.log
+</match>
+
+<% end %>
+
+####
+## Source descriptions:
+##
+
+## apache
+<source>
+  type tail
+  format apache2
+  path /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d
+  tag pass.apache.error
+</source>
+
+<source>
+  type tail
+  format apache2
+  path /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d
+  tag pass.apache.access
+</source>
+
+<source>
+  type tail
+  format apache2
+  path /var/log/httpd/coupy.<%= node['base']['env'] %>.mediba.jp-error_log.%Y%m%d
+  tag coupy.apache.error
+</source>
+
+<source>
+  type tail
+  format apache2
+  path /var/log/httpd/coupy.<%= node['base']['env'] %>.mediba.jp-access_log.%Y%m%d
+  tag coupy.apache.access
+</source>
+
+## ap.log
+<source>
+  type tail
+  format /^(?<time>[^ ]+ [^ ]+ [^ ]+) +(?<host>[^ ]+) +(?<url>[^ ]+) +(?<level>[^ ]+) +(?<message>[^ ]+)$/
+  path /var/log/ap/ap.log
+  tag pass.ap
+</source>
+
+<source>
+  type tail
+  format /^(?<time>[^ ]+ [^ ]+ [^ ]+) +(?<host>[^ ]+) +(?<url>[^ ]+) +(?<level>[^ ]+) +(?<message>[^ ]+)$/
+  path /var/log/ap/ap.log
+  tag coupy.ap
+</source>
+
+<source>
+  type tail
+  format /^(?<time>[^ ]+ [^ ]+ [^ ]+) +(?<host>[^ ]+) +(?<url>[^ ]+) +(?<level>[^ ]+) +(?<message>[^ ]+)$/
+  path /var/log/ap/ap_console.log
+  tag coupy.ap.console
+</source>
+
+## PRIME
+<source>
+  type tail
+  format /^(?<time>[^ ]* [^ ]*) (?<coupon_id>[^ ]+) +(?<area_code>[^ ]+) +(?<au_id>[^ ]+)$/
+  time_format %Y-%m-%d %H:%M:%S
+  path /var/log/ap/coupon-detail.log
+  pos_file /var/log/td-agent/coupon-detail.pos
+  tag pass.coupon.detail
+</source>
+
+<% end %>
