@@ -49,9 +49,23 @@ user "apache" do
   supports :create => true
 end
 
+user "mediu" do
+  uid 3000
+  comment "mediba user"
+  shell "/bin/bash"
+  password node["base"]["mediu_passwd"]
+  supports :create => true
+end
+
+group "mediu" do
+  gid 3000
+  members ['mediu']
+  action :create
+end
+
 group "apache" do
   gid 48
-  members ['apache']
+  members ['apache','mediu']
   action :create
 end
 

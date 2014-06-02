@@ -10,3 +10,10 @@
 link "/var/www/coupy" do
   to "/vagrant/coupy"
 end
+
+# ap_console.logダミーファイル
+cookbook_file "/var/log/ap/ap_console.log" do
+  owner "apache"
+  group "apache"
+  mode 00755
+end

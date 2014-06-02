@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network :forwarded_port, guest: 49001, host: 49001
+  # config.vm.network :forwarded_port, guest: 49001, host: 49001
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -90,7 +90,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # 各レシピ実行
   config.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = ["./chef-coupy/site-cookbooks","./chef-coupy/cookbooks"]
+      chef.cookbooks_path = ["./chef-repo/site-cookbooks","./chef-repo/cookbooks"]
       chef.run_list = [
         "yum",
         "database",
@@ -104,15 +104,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "smartpass",
         "au_core",
         "api-smartpass",
-        "cdn-img"
+        "cdn-img",
+        "td-agent"
       ]
       # レシピ用変数設定
       chef.json = {
+        :base => {
+          :env => "local",
+          :mediu_passwd => "mediu"
+        },
         :mysql => {
           :aws_password => "awspassword"
         },
-        :apache => {
-          :env => "local",
+        :apache => {          
           :appenv => "point/local",
           :gateway => "20.0.0.1"
         }

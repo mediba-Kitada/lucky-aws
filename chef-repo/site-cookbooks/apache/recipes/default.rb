@@ -19,6 +19,13 @@ directory "/var/log/httpd" do
   action :create
 end
 
+directory "/var/log/ap" do
+  mode 00755
+  user "apache"
+  group "apache"
+  action :create
+end
+
 service "httpd" do
   supports :status => true,:restart => true,:reload => true
   action [:enable,:start]
