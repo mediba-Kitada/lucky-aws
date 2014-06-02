@@ -1011,12 +1011,12 @@ NameVirtualHost *:80
 # 0821資産
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
-    DocumentRoot /var/www/pass.auone.jp
+    DocumentRoot /var/www/point.pass.auone.jp
     ServerName point.pass.<%= node['base']['env'] %>.auone.jp
     ServerAlias point.pass.<%= node['base']['env'] %>.auone.jp
     ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"
     CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d 86400 540\'" combined
-    <Directory "/var/www/pass.auone.jp">
+    <Directory "/var/www/point.pass.auone.jp">
 	Options FollowSymLinks
 	AllowOverride All
     </Directory>

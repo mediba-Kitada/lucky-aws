@@ -105,7 +105,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "au_core",
         "api-smartpass",
         "cdn-img",
-        "fluentd"
+        "fluentd",
+        "kittyhawk"
       ]
       # レシピ用変数設定
       chef.json = {
