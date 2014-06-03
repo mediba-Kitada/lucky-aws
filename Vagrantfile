@@ -114,6 +114,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           :env => "local",
           :mediu_passwd => "mediu"
         },
+        :aws => {
+          :access => "hoge",
+          :secret => "hoge"
+        },
         :mysql => {
           :aws_password => "awspassword"
         },

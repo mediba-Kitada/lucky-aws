@@ -14,6 +14,20 @@ include conf.d/*.conf
   path /var/log/td-agent/coupon-detail.log
 </match>
 
+<%else %>
+
+## td-agent
+<match pass.apache.access>
+  type s3
+  aws_key_id <%= node['aws']['access']%>
+  aws_sec_key <%= node['aws']['secret']%>
+  s3_bucket td-agent-log
+  path logs/
+  buffer_path /var/log/td-agent/s3
+  time_slice_format <%= node['base']['env']%>/apache-access/%Y%m%d/${hostname}-%H
+  time_slice_wait 10m
+</match>
+
 <% end %>
 
 ####
