@@ -11,6 +11,13 @@ link "/var/www/point.pass.auone.jp" do
   to "/vagrant/kittyhawk/point.pass.auone.jp"
 end
 
+directory "/var/runtime" do
+  mode 00777
+  user "apache"
+  group "apache"
+  action :create
+end
+
 # ap.logダミーファイル
 cookbook_file "/var/log/ap/ap.log" do
   owner "apache"
