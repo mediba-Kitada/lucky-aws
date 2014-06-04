@@ -122,7 +122,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           :aws_password => "awspassword"
         },
         :apache => {          
-          :appenv => "point/local",
+          :appenv => "local",
           :gateway => "20.0.0.1"
         }
       }
