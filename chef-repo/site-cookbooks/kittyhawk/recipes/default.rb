@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-link "/var/www/point.pass.auone.jp" do
-  to "/vagrant/kittyhawk/point.pass.auone.jp"
+link "/var/www/tokuten.auone.jp" do
+  to "/vagrant/kittyhawk/tokuten.auone.jp"
 end
 
 directory "/var/runtime" do

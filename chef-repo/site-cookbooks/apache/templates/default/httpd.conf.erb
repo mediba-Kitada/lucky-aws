@@ -1011,12 +1011,12 @@ NameVirtualHost *:80
 # 0821資産
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
-    DocumentRoot /var/www/point.pass.auone.jp
-    ServerName point.pass.<%= node['base']['env'] %>.auone.jp
-    ServerAlias point.pass.<%= node['base']['env'] %>.auone.jp
-    ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"
-    CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d 86400 540\'" combined
-    <Directory "/var/www/point.pass.auone.jp">
+    DocumentRoot /var/www/tokuten.auone.jp
+    ServerName tokuten.<%= node['base']['env'] %>.auone.jp
+    ServerAlias tokuten.<%= node['base']['env'] %>.auone.jp
+    ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/tokuten.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"
+    CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/tokuten.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d 86400 540\'" combined
+    <Directory "/var/www/tokuten.auone.jp">
 	Options FollowSymLinks
 	AllowOverride All
     </Directory>
@@ -1049,10 +1049,10 @@ NameVirtualHost *:80
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
     DocumentRoot /var/www/api.pass.auone.jp
-    ServerName api.point.pass.<%= node['base']['env'] %>.auone.jp
-    ServerAlias api.point.pass.<%= node['base']['env'] %>.auone.jp
-    ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/api.point.pass.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"
-    CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/api.point.pass.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d 86400 540\'" combined
+    ServerName api.tokuten.<%= node['base']['env'] %>.auone.jp
+    ServerAlias api.tokuten.<%= node['base']['env'] %>.auone.jp
+    ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/api.tokuten.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"
+    CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/api.tokuten.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d 86400 540\'" combined
     <Directory />
 	Options FollowSymLinks
 	AllowOverride All
@@ -1077,7 +1077,7 @@ NameVirtualHost *:80
 
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
-    DocumentRoot /var/www/cdn-img
+    DocumentRoot /var/www/cdn
     ServerName cdn-img.<%= node['base']['env'] %>.auone.jp
     ServerAlias cdn-img.<%= node['base']['env'] %>.auone.jp
     ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/cdn-img.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d 86400 540\'"

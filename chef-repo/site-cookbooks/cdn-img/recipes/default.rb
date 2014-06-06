@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-link "/var/www/cdn-img" do
-  to "/vagrant/trunk"
+link "/var/www/cdn" do
+  to "/vagrant/kittyhawk/cdn"
 end

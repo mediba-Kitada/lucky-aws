@@ -38,14 +38,14 @@ include conf.d/*.conf
 <source>
   type tail
   format apache2
-  path /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d
+  path /var/log/httpd/tokuten.<%= node['base']['env'] %>.auone.jp-error_log.%Y%m%d
   tag pass.apache.error
 </source>
 
 <source>
   type tail
   format apache2
-  path /var/log/httpd/point.pass.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d
+  path /var/log/httpd/tokuten.<%= node['base']['env'] %>.auone.jp-access_log.%Y%m%d
   tag pass.apache.access
 </source>
 
