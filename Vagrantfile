@@ -123,7 +123,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         },
         :apache => {          
           :appenv => "local",
-          :gateway => "20.0.0.1"
+          :gateway => "20.0.0.1",
+          :enablemmap => "off",
+          :enablesendfile => "off"
         }
       }
 
