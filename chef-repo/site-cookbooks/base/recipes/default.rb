@@ -69,6 +69,19 @@ group "apache" do
   action :create
 end
 
+group "root" do
+  gid 0
+  members ['root','vagrant']
+  action :create
+end
+
+directory "/var/www" do
+  mode 00775
+  user "root"
+  group "root"
+  action :create
+end
+
 remote_file "/tmp/yii.tar.gz" do
   source "https://github.com/yiisoft/yii/releases/download/1.1.14/yii-1.1.14.f0fee9.tar.gz"
 end

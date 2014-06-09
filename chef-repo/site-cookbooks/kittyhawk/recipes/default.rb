@@ -31,3 +31,12 @@ cookbook_file "/var/log/ap/coupon-detail.log" do
   group "apache"
   mode 00755
 end
+
+# デプロイツール(capistrano)検証用
+if node['base']['cap'] == "1"
+  
+  link "/var/www/tokuten.auone.jp" do
+    action :delete
+  end
+  
+end

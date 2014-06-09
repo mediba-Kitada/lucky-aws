@@ -112,7 +112,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       chef.json = {
         :base => {
           :env => "local",
-          :mediu_passwd => "mediu"
+          :mediu_passwd => "mediu",
+          :cap => "1"
         },
         :aws => {
           :access => "hoge",
