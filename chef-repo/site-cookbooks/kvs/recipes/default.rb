@@ -11,10 +11,17 @@ package "memcached" do
   action :install
 end
 
-# デフォルトポート:11211は停止
+# デフォルトポート:11211
 service "memcached" do
-  action [:enable,:stop]
-  supports :restart => false, :start => false, :stop => true
+  supports :status => true, :restart => true, :reload => true
+  action [:enable,:start]
+end
+
+template "/etc/sysconfig/memcached" do
+  owner "memcached"
+  group "memcached"
+  mode 00644
+  notifies :reload, 'service[memcached]'
 end
 
 # ポート:11220
