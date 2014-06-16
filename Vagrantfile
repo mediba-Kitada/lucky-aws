@@ -113,7 +113,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :base => {
           :env => "local",
           :mediu_passwd => "mediu",
-          :cap => "1"
+          :cap => "0"
         },
         :aws => {
           :access => "hoge",
