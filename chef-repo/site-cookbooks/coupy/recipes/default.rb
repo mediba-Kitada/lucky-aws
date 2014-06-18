@@ -7,9 +7,21 @@
 # All rights reserved - Do Not Redistribute
 #
 
-link "/var/www/coupy" do
-  to "/vagrant/coupy"
+if node['apache']['appenv'] == 'cpydev'
+  
+  link "/var/www/coupy" do
+    to "/home/mediu3g/coupy"
+  end
+  
+else
+
+  link "/var/www/coupy" do
+    to "/vagrant/coupy"
+  end
+  
 end
+
+
 
 # ap_console.logダミーファイル
 cookbook_file "/var/log/ap/ap_console.log" do

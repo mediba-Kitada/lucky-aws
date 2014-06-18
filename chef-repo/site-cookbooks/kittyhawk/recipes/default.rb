@@ -7,10 +7,19 @@
 # All rights reserved - Do Not Redistribute
 #
 
-link "/var/www/tokuten.auone.jp" do
-  to "/vagrant/kittyhawk/tokuten.auone.jp"
-end
+if node['apache']['appenv'] == 'cpydev'
+  
+  link "/var/www/tokuten.auone.jp" do
+    to "/home/mediu3g/kittyhawk/tokuten.auone.jp"
+  end
+    
+else
 
+  link "/var/www/tokuten.auone.jp" do
+    to "/vagrant/kittyhawk/tokuten.auone.jp"
+  end
+
+end
 directory "/var/runtime" do
   mode 00777
   user "apache"

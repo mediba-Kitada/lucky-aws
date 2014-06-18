@@ -35,7 +35,7 @@ link "/etc/localtime" do
   to "/usr/share/zoneinfo/Asia/Tokyo"
 end
 
-%w{git telnet wget zsh nkf tig vim}.each do |pkg|
+%w{git telnet wget nkf tig vim zip crontabs}.each do |pkg|
   package pkg do
     action :install
     options "--enablerepo=epel"
@@ -49,18 +49,22 @@ user "apache" do
   supports :create => true
 end
 
-user "mediu" do
-  uid 3000
-  comment "mediba user"
-  shell "/bin/bash"
-  password node["base"]["mediu_passwd"]
-  supports :create => true
-end
+if node['apache']['appenv'] != 'cpydev'
 
-group "mediu" do
-  gid 3000
-  members ['mediu']
-  action :create
+  user "mediu" do
+    uid 3000
+    comment "mediba user"
+    shell "/bin/bash"
+    password node["base"]["mediu_passwd"]
+    supports :create => true
+  end
+
+  group "mediu" do
+    gid 3000
+    members ['mediu']
+    action :create
+  end
+
 end
 
 group "apache" do
@@ -69,12 +73,16 @@ group "apache" do
   action :create
 end
 
-group "root" do
-  gid 0
-  members ['root','vagrant']
-  action :create
-end
+if node['apache']['appenv'] == 'local'
 
+  group "root" do
+    gid 0
+    members ['root','vagrant']
+    action :create
+  end
+  
+end
+  
 directory "/var/www" do
   mode 00775
   user "root"

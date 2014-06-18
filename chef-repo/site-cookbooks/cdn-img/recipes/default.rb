@@ -7,6 +7,16 @@
 # All rights reserved - Do Not Redistribute
 #
 
-link "/var/www/cdn" do
-  to "/vagrant/kittyhawk/cdn"
+if node['apache']['appenv'] == 'cpydev'
+
+  link "/var/www/cdn" do
+    to "/home/mediu3g/kittyhawk/cdn"
+  end
+    
+else
+  
+  link "/var/www/cdn" do
+    to "/vagrant/kittyhawk/cdn"
+  end
+
 end
