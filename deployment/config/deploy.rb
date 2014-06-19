@@ -11,18 +11,14 @@ set :repo_archive, 'tokuten.auone.jp.tgz'
 ## inialize
 ##
 
-# 全タスクを一度削除
-framework_tasks = [:starting, :started, :updating, :updated, :publishing, :published, :finishing, :finished]
-
-framework_tasks.each do |t|
-  Rake::Task["deploy:#{t}"].clear
-end
-
-Rake::Task[:deploy].clear
-
-# デプロイブランチを対話的に指定
-# @see http://qiita.com/Alice1017/items/ad061f33c8d42d52e079
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+# 独自タスク実装のため、デフォルトのタスクを削除
+#framework_tasks = [ :pulishing]
+#
+#framework_tasks.each do |t|
+#  Rake::Task["deploy:#{t}"].clear
+#end
+#
+#Rake::Task[:deploy].clear
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www'
@@ -47,3 +43,15 @@ set :scm, :git
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# published hook
+namespace :deploy do
+  task :published do
+    on release_roles :all do
+      execute :rm, '-rf', current_path
+      current_path = fetch(:deploy_to) +'/'+ fetch(:application)
+      execute :rm, '-rf', current_path
+      execute :ln, '-s', release_path.join(fetch(:application)) , current_path
+    end
+  end
+end
