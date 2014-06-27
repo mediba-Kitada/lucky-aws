@@ -44,14 +44,51 @@ set :scm, :git
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# published hook
+# デプロイアクションを拡張
 namespace :deploy do
+  
+  # started hook
+  # 準備完了後のアクション
+  task :started do
+    on release_roles :all do
+      # todo LBから切り離し
+    end    
+  end
+
+  # published hook
+  # アプリケーションデプロイ直後のアクション
   task :published do
     on release_roles :all do
-      execute :rm, '-rf', current_path
+      # シムリンクをtokuten.auone.jpに貼り直す
+      capture execute :rm, '-rf', current_path
+      info output
       current_path = fetch(:deploy_to) +'/'+ fetch(:application)
       execute :rm, '-rf', current_path
       execute :ln, '-s', release_path.join(fetch(:application)) , current_path
+      
+      # todo APCuをクリア
+      
+      # todo apache再起動
+      
+    end
+  end
+  
+  # finished hook
+  # 全ての作業完了後のアクション
+  task :finished do
+    on release_roles :all do
+      
+      # todo LBに復旧
+      
+    end    
+  end
+  
+  # アクションが失敗した場合の処理
+  task :failed do
+    on release_roles :all do
+      
+      # todo エラーログを出力し、手動復旧
+      
     end
   end
 end
