@@ -7,7 +7,7 @@ set :repo_name, 'kittyhawk'
 set :repo_deploy, 'master'
 set :repo_archive, 'tokuten.auone.jp.tgz'
 
-#### 
+####
 ## inialize
 ##
 
@@ -46,13 +46,16 @@ set :scm, :git
 
 # デプロイアクションを拡張
 namespace :deploy do
-  
+
   # started hook
   # 準備完了後のアクション
   task :started do
     on release_roles :all do
       # todo LBから切り離し
-    end    
+      # LBからの切り離しは、apacheの停止をトリガーとしたい
+      # @see http://docs.aws.amazon.com/ja_jp/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#healthcheck
+      execute "sudo apachectl graceful-stop"
+    end
   end
 
   # published hook
@@ -65,30 +68,33 @@ namespace :deploy do
       current_path = fetch(:deploy_to) +'/'+ fetch(:application)
       execute :rm, '-rf', current_path
       execute :ln, '-s', release_path.join(fetch(:application)) , current_path
-      
+
       # todo APCuをクリア
-      
-      # todo apache再起動
-      
+
+
     end
   end
-  
+
   # finished hook
   # 全ての作業完了後のアクション
   task :finished do
     on release_roles :all do
-      
+
       # todo LBに復旧
-      
-    end    
+      # LBへの復旧は、apacheの起動をトリガーとしたい
+      execute "sudo service httpd start"
+
+    end
   end
-  
+
   # アクションが失敗した場合の処理
   task :failed do
     on release_roles :all do
-      
+
+      # LBから切り離し(apache停止)
+      execute "sudo service httpd stop"
       # todo エラーログを出力し、手動復旧
-      
+
     end
   end
 end
