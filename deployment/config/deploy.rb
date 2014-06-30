@@ -11,15 +11,6 @@ set :repo_archive, 'tokuten.auone.jp.tgz'
 ## inialize
 ##
 
-# 独自タスク実装のため、デフォルトのタスクを削除
-#framework_tasks = [ :pulishing]
-#
-#framework_tasks.each do |t|
-#  Rake::Task["deploy:#{t}"].clear
-#end
-#
-#Rake::Task[:deploy].clear
-
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www'
 
@@ -69,9 +60,6 @@ namespace :deploy do
       execute :rm, '-rf', current_path
       execute :ln, '-s', release_path.join(fetch(:application)) , current_path
 
-      # todo APCuをクリア
-
-
     end
   end
 
@@ -83,6 +71,9 @@ namespace :deploy do
       # todo LBに復旧
       # LBへの復旧は、apacheの起動をトリガーとしたい
       execute "sudo service httpd start"
+
+      # todo APCuをクリア
+      execute "wget http://apc.local.mediba.jp/apc.php?CC=1"
 
     end
   end

@@ -31,8 +31,15 @@ service "httpd" do
   action [:enable,:start]
 end
 
-template "/etc/httpd/conf/httpd.conf" do 
+template "/etc/httpd/conf/httpd.conf" do
   owner "apache"
   group "apache"
   notifies :reload,'service[httpd]'
+end
+
+# APCuクリアのため、hostsファイルを更新
+template "/etc/hosts" do
+  mode 00644
+  owner "root"
+  group "root"
 end
