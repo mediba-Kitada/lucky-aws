@@ -73,7 +73,7 @@ namespace :deploy do
       execute "sudo service httpd start"
 
       # todo APCuをクリア
-      execute "wget http://apc.local.mediba.jp/apc.php?CC=1"
+      execute "wget -q http://apc.local.mediba.jp/apc.php?CC=1"
 
     end
   end
