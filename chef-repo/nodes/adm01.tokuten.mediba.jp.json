@@ -1,0 +1,24 @@
+{
+  "base":{
+    "env":"product",
+    "mediu_passwd":"mediu",
+    "cpa":"0"
+  },
+  "mysql":{
+    "aws_password":"awspassword"
+  },
+  "apache":{
+    "appenv":"product",
+    "enablemmap":"off",
+    "enablesendfile":"off"
+  },
+  "run_list":[
+    "yum",
+    "database",
+    "base",
+    "apache",
+    "mysql",
+    "rsyslog",
+    "php55",
+    ]
+}

@@ -2,3 +2,5 @@
 source "https://rubygems.org"
 
 gem "capistrano"
+gem "chef"
+gem "knife-solo"
